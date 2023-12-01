@@ -1,0 +1,26 @@
+
+# Create date table with year, month, quarter based on todays date
+import pandas as pd
+import datetime
+
+# Define start and end dates
+START_DATE = '1930-01-01'
+END_DATE = datetime.date.today()
+
+# Create a date range between start and end dates
+date_range = pd.date_range(start=START_DATE, end=END_DATE)
+
+# Create a DataFrame using the date range as the index
+data_table = pd.DataFrame(index=date_range)
+
+# Add columns for year, month, and quarter
+data_table['Year'] = data_table.index.year
+data_table['Month'] = data_table.index.month
+data_table['Quarter'] = data_table.index.quarter
+
+# Reset the index to have the dates as a column
+data_table.reset_index(inplace=True)
+data_table.rename(columns={'index': 'Date'}, inplace=True)
+
+# Display the DataFrame
+print(data_table)
